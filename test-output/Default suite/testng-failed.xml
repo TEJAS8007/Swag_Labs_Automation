@@ -6,8 +6,8 @@
       <class name="Com.QA.tests.Product_Test">
         <methods>
           <include name="set_up"/>
+          <include name="Cart_Page_Test"/>
           <include name="tear_Down"/>
-          <include name="Home_Page_Test"/>
         </methods>
       </class> <!-- Com.QA.tests.Product_Test -->
     </classes>

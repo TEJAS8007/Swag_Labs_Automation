@@ -19,7 +19,9 @@ public class Driver_factory {
 		
 		if(browserNAme.equals("chrome")) {
 			ChromeOptions chrome = new ChromeOptions();
-			chrome.addArguments("user-data-dir=/path/to/new/profile");
+			chrome.addArguments("--disable-save-password-bubble");
+			chrome.addArguments("--disable-notifications");
+			chrome.addArguments("user-data-dir=" + System.getProperty("user.dir") + "/ChromeProfile");
 			driver=new ChromeDriver(chrome);
 		}
 		else if(browserNAme.equals("firefox")) {

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,7 +60,7 @@ public class Utilities {
 	}
 
 
-	public static WebElement Find_Element_With_Fluent(WebDriver driver,By locator) {
+	public static WebElement Find_Element_With_Fluent(final WebDriver driver,final By locator) {
 
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
 				.withTimeout(Duration.ofSeconds(5))
@@ -90,4 +91,16 @@ public class Utilities {
 				);
 	}
 
+	public static void accepting_alert(WebDriver driver) {
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		
+		try {
+
+			Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+			alert.accept();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
