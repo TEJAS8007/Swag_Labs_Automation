@@ -12,7 +12,7 @@ public class Driver_factory {
 	static  WebDriver driver;
 	static Properties prop;
 	
-	public WebDriver init_Driver() {
+	public static WebDriver init_Driver() {
 		
 		String browserNAme = Property_Reader.init_prop().getProperty("browser").trim();
 		String url = Property_Reader.init_prop().getProperty("url").trim();

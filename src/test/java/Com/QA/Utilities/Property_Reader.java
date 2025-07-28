@@ -20,10 +20,30 @@ public class Property_Reader {
 	static WebDriver driver;
 
 	public static Properties init_prop() {
-		
+
 		try {
 			FileInputStream file = new FileInputStream("src/test/resources/Data/Config.properties");
-			
+
+			pro=new Properties();
+			pro.load(file);
+		} 
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return pro;
+	}
+
+	public static Properties login_prop() {
+
+		try {
+			FileInputStream file = new FileInputStream("src/test/resources/Data/Login.properties");
+
 			pro=new Properties();
 			pro.load(file);
 		} 

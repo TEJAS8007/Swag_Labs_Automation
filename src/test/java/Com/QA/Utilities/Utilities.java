@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 public class Utilities {
 
-	public static void validate_Title(WebDriver driver,String title) {
+	public static String validate_Title(WebDriver driver,String title) {
 
 		String Expected_Title = driver.getTitle();
 
@@ -26,18 +26,21 @@ public class Utilities {
 		else {
 			Assert.assertTrue(false);
 		}
+		return Expected_Title;
 	}
 
-	public static void validate_Url(WebDriver driver,String url) {
+	public static String validate_Url(WebDriver driver,String url) {
 
-		String Expected_Title = driver.getTitle();
+		String Expected_Url = driver.getCurrentUrl();
 
-		if(Expected_Title.equals(url)) {
+		if(Expected_Url.equals(url)) {
 			Assert.assertTrue(true);
 		}
 		else {
 			Assert.assertTrue(false);
 		}
+		
+		return Expected_Url;
 	}
 
 	public static void Click_With_Fluent(WebDriver driver,By locator) {
