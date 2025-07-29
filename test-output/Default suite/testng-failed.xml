@@ -5,8 +5,11 @@
     <classes>
       <class name="Com.QA.tests.Product_Test">
         <methods>
-          <include name="set_up"/>
+          <include name="Checkout_Page_Test"/>
+          <include name="Login_Page_Test"/>
+          <include name="Home_Page_Test"/>
           <include name="Cart_Page_Test"/>
+          <include name="set_up"/>
           <include name="tear_Down"/>
         </methods>
       </class> <!-- Com.QA.tests.Product_Test -->

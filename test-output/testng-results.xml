@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-28T21:10:44 IST" name="Default suite" finished-at="2025-07-28T21:10:53 IST" duration-ms="9009">
+  <suite started-at="2025-07-29T20:24:44 IST" name="Suite" finished-at="2025-07-29T20:24:55 IST" duration-ms="10947">
     <groups>
     </groups>
-    <test started-at="2025-07-28T21:10:44 IST" name="Default test" finished-at="2025-07-28T21:10:53 IST" duration-ms="9009">
+    <test started-at="2025-07-29T20:24:44 IST" name="Test" finished-at="2025-07-29T20:24:55 IST" duration-ms="10947">
       <class name="Com.QA.tests.Product_Test">
-        <test-method is-config="true" signature="set_up()[pri:0, instance:Com.QA.tests.Product_Test@2d710f1a]" started-at="2025-07-28T21:10:44 IST" name="set_up" finished-at="2025-07-28T21:10:48 IST" duration-ms="4085" status="PASS">
+        <test-method is-config="true" signature="set_up()[pri:0, instance:Com.QA.tests.Product_Test@18df8434]" started-at="2025-07-29T20:24:44 IST" name="set_up" finished-at="2025-07-29T20:24:51 IST" duration-ms="7119" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- set_up -->
-        <test-method signature="Login_Page_Test()[pri:1, instance:Com.QA.tests.Product_Test@2d710f1a]" started-at="2025-07-28T21:10:48 IST" name="Login_Page_Test" finished-at="2025-07-28T21:10:49 IST" duration-ms="505" status="PASS">
+        <test-method signature="Login_Page_Test()[pri:1, instance:Com.QA.tests.Product_Test@18df8434]" started-at="2025-07-29T20:24:51 IST" name="Login_Page_Test" finished-at="2025-07-29T20:24:52 IST" duration-ms="499" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Login_Page_Test -->
-        <test-method signature="Home_Page_Test()[pri:2, instance:Com.QA.tests.Product_Test@2d710f1a]" started-at="2025-07-28T21:10:49 IST" name="Home_Page_Test" finished-at="2025-07-28T21:10:49 IST" duration-ms="722" status="PASS">
+        <test-method signature="Home_Page_Test()[pri:2, instance:Com.QA.tests.Product_Test@18df8434]" started-at="2025-07-29T20:24:52 IST" name="Home_Page_Test" finished-at="2025-07-29T20:24:53 IST" depends-on-methods="Login_Page_Test()" duration-ms="804" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Home_Page_Test -->
-        <test-method signature="Cart_Page_Test()[pri:3, instance:Com.QA.tests.Product_Test@2d710f1a]" started-at="2025-07-28T21:10:49 IST" name="Cart_Page_Test" finished-at="2025-07-28T21:10:53 IST" duration-ms="3330" status="PASS">
+        <test-method signature="Cart_Page_Test()[pri:3, instance:Com.QA.tests.Product_Test@18df8434]" started-at="2025-07-29T20:24:53 IST" name="Cart_Page_Test" finished-at="2025-07-29T20:24:53 IST" duration-ms="370" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Cart_Page_Test -->
-        <test-method is-config="true" signature="tear_Down()[pri:0, instance:Com.QA.tests.Product_Test@2d710f1a]" started-at="2025-07-28T21:10:53 IST" name="tear_Down" finished-at="2025-07-28T21:10:53 IST" duration-ms="278" status="PASS">
+        <test-method signature="Checkout_Page_Test(java.lang.String,java.lang.String,java.lang.String)[pri:4, instance:Com.QA.tests.Product_Test@18df8434]" started-at="2025-07-29T20:24:54 IST" name="Checkout_Page_Test" data-provider="getData()" finished-at="2025-07-29T20:24:54 IST" duration-ms="670" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Steve]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Warne]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[wedfrt4t]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Checkout_Page_Test -->
+        <test-method is-config="true" signature="tear_Down()[pri:0, instance:Com.QA.tests.Product_Test@18df8434]" started-at="2025-07-29T20:24:54 IST" name="tear_Down" finished-at="2025-07-29T20:24:55 IST" duration-ms="239" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tear_Down -->
       </class> <!-- Com.QA.tests.Product_Test -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

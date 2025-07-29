@@ -79,11 +79,6 @@ public class Cart_Page {
 	public void click_On_Cart() {
 
 		Utilities.Click_With_Fluent(driver, cart_Button);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 }

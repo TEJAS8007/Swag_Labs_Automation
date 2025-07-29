@@ -1,6 +1,9 @@
 package Com.QA.tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import Com.QA.Utilities.Excel_Data_Reader;
 
 public class Product_Test extends Base_Test{
 
@@ -16,7 +19,7 @@ public class Product_Test extends Base_Test{
 		log.info("Login Complete....");
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 2,dependsOnMethods = "Login_Page_Test()")
 	void Home_Page_Test() {
 	
 		home.Verify_Home_page_Title(Data.getProperty("title"));
@@ -51,4 +54,34 @@ public class Product_Test extends Base_Test{
 		log.info("Cart Page Clicked Cart....");
 	}
 	
+	@Test(priority = 4, dataProvider = "getData()")
+	public void Checkout_Page_Test(String fn,String ln,String po) {
+		
+		checkout.Verify_Checkout_Page_Title();
+		log.info("Checkout Page Title Verified.....");
+		checkout.Verify_Checkout_Page_Url();
+		log.info("Checkout Page Url Verified.....");
+		checkout.Verify_Product_Name();
+		log.info("Checkout Product Name Verified.....");
+		checkout.Verify_Product_Info();
+		log.info("Checkout Product Info Verified.....");
+		checkout.Verify_Product_Price();
+		log.info("Checkout Product Price Verified.....");
+		checkout.click_on_Checkout();
+		log.info("Clicked On Checkout.....");
+		
+		
+		checkout.Sending_Address_Data(fn, ln, po);
+		log.info("Address details Sent....");
+		checkout.click_On_Continue();
+		log.info("Clicked On Continue Button.....");
+		
+	}
+	
+	@DataProvider(name = "getData()")
+	public Object[][] getData() {
+		
+		Object[][] obj = Excel_Data_Reader.getExcelData();
+		return obj;
+	}
 }

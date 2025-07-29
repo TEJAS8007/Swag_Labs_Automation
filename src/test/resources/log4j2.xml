@@ -5,23 +5,12 @@
     </Properties>
 
     <Appenders>
-        <!-- File Appender -->
-        <RollingFile name="fileLogger"
-            fileName="${basePath}/app.log"
-            filePattern="${basePath}/app-%d{yyyy-MM-dd}.log">
+        <!-- File Appender (Overwrite on each run) -->
+        <File name="fileLogger" fileName="${basePath}/app.log" append="false">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
-                <SizeBasedTriggeringPolicy size="10MB" />
-            </Policies>
-            <DefaultRolloverStrategy max="10">
-                <Delete basePath="${basePath}" maxDepth="10">
-                    <IfLastModified age="30d" />
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
+        </File>
 
         <!-- Console Appender -->
         <Console name="console" target="SYSTEM_OUT">

@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 import Com.QA.Pages.Cart_Page;
+import Com.QA.Pages.CheckOut_Page;
 import Com.QA.Pages.Home_Page;
 import Com.QA.Pages.Login_Page;
 import Com.QA.Utilities.Driver_factory;
@@ -21,6 +22,7 @@ public class Base_Test {
 	Login_Page login;
 	Home_Page home;
 	Cart_Page cart;
+	CheckOut_Page checkout;
 	Properties Data;
 	Logger log;
 
@@ -32,6 +34,7 @@ public class Base_Test {
 		login = new Login_Page(driver);
 		home = new Home_Page(driver);
 		cart = new Cart_Page(driver);
+		checkout = new CheckOut_Page(driver);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		log.debug("----------Before Test SetUp Started-----------");
 	}
