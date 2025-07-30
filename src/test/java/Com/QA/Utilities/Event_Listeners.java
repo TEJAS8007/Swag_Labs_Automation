@@ -1,117 +1,115 @@
 package Com.QA.Utilities;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import java.io.File;
+
 import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-public class Event_Listeners implements ITestListener{
+public class Event_Listeners implements ITestListener {
 
-
-	ExtentSparkReporter  htmlReporter;
+	ExtentSparkReporter htmlReporter;
 	ExtentReports reports;
 	ExtentTest test;
+	public static WebDriver driver; // Must be assigned from your base class
 
-	public void configureReport()
-	{
-		String timestamp = new SimpleDateFormat("yyyy.mm.dd.hh.mm.ss").format(new Date());
-		String reportName = "Swag_Labs_Automation_Project" + timestamp + ".html";
+	public void configureReport() {
+		String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String reportName = "Swag_Labs_Report_" + timestamp + ".html";
 		htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//Reports//" + reportName);
 		reports = new ExtentReports();
 		reports.attachReporter(htmlReporter);
 
-		//add system information/environment info to reports
-		reports.setSystemInfo("Machine:", "pc1");
-		reports.setSystemInfo("OS", "windows 11");
-		reports.setSystemInfo("user name:", "Tejas");
+		reports.setSystemInfo("Machine", "pc1");
+		reports.setSystemInfo("OS", "Windows 11");
+		reports.setSystemInfo("User Name", "Tejas");
 
-		//configuration to change look and feel of report
 		htmlReporter.config().setDocumentTitle("Extent Listener Report");
-		htmlReporter.config().setReportName("This is my First Report");
+		htmlReporter.config().setReportName("Swag Labs Automation Report");
 		htmlReporter.config().setTheme(Theme.DARK);
-
-
 	}
 
-	//OnStart method is called when any Test starts.
-	public void onStart(ITestContext Result)					
-	{		
+	@Override
+	public void onStart(ITestContext context) {
 		configureReport();
-		System.out.println("On Start method invoked....");  		
-	}	
+		System.out.println("On Start method invoked....");
+	}
 
-
-	public void onFinish(ITestContext Result) 					
-	{		
-		System.out.println("On Finished method invoked....");  	
+	@Override
+	public void onFinish(ITestContext context) {
+		System.out.println("On Finished method invoked....");
 		reports.flush();
-	}		
+	}
 
+	@Override
+	public void onTestStart(ITestResult result) {
+		System.out.println("Test Started: " + result.getName());
+	}
 
+	@Override
+	public void onTestSuccess(ITestResult result) {
+		System.out.println("Test Passed: " + result.getName());
+		test = reports.createTest(result.getName());
+		test.log(Status.PASS, MarkupHelper.createLabel("Test Passed: " + result.getName(), ExtentColor.GREEN));
 
-
-	public void onTestFailure(ITestResult Result) 					
-	{		
-		System.out.println("Name of test method failed:" + Result.getName() );  		
-		test = reports.createTest(Result.getName());
-		test.log(Status.FAIL, MarkupHelper.createLabel("Name of the failed test case is: " + Result.getName() ,ExtentColor.RED));
-
-		String screenShotPath = System.getProperty("user.dir") + "\\ScreenShots\\" + Result.getName() + ".png";
-
-		File screenShotFile = new File(screenShotPath);
-
-		if(screenShotFile.exists())
-		{
-			test.fail("Captured Screenshot is below:" + test.addScreenCaptureFromPath(screenShotPath));
-
+		String screenshotPath = captureScreenshot(result.getName());
+		if (screenshotPath != null) {
+			test.pass("Screenshot:",
+				MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 		}
+	}
 
+	@Override
+	public void onTestFailure(ITestResult result) {
+		System.out.println("Test Failed: " + result.getName());
+		test = reports.createTest(result.getName());
+		test.log(Status.FAIL, MarkupHelper.createLabel("Test Failed: " + result.getName(), ExtentColor.RED));
 
-	}		
-
-	public void onTestSkipped(ITestResult Result)					
-	{		
-		System.out.println("Name of test method skipped:" + Result.getName() );  		
-
-		test = reports.createTest(Result.getName());
-		test.log(Status.SKIP, MarkupHelper.createLabel("Name of the skip test case is: " + Result.getName() ,ExtentColor.YELLOW));
-	}			
-
-	public void onTestStart(ITestResult Result)					
-	{		
-		System.out.println("Name of test method started:" + Result.getName() );  		
-
-	}		
-
-	public void onTestSuccess(ITestResult Result)					
-	{		
-		System.out.println("Name of test method sucessfully executed:" + Result.getName() );  		
-
-		test = reports.createTest(Result.getName());
-		test.log(Status.PASS, MarkupHelper.createLabel("Name of the passed test case is: " + Result.getName() ,ExtentColor.GREEN));
-
-		String screenShotPath = System.getProperty("user.dir") + "\\ScreenShots\\" + Result.getName() + ".png";
-
-		File screenShotFile = new File(screenShotPath);
-
-		if(screenShotFile.exists())
-		{
-			test.pass("Captured Screenshot is below:" + test.addScreenCaptureFromPath(screenShotPath));
-
+		String screenshotPath = captureScreenshot(result.getName());
+		if (screenshotPath != null) {
+			test.fail("Screenshot:",
+				MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 		}
-	}		
+	}
 
+	@Override
+	public void onTestSkipped(ITestResult result) {
+		System.out.println("Test Skipped: " + result.getName());
+		test = reports.createTest(result.getName());
+		test.log(Status.SKIP, MarkupHelper.createLabel("Test Skipped: " + result.getName(), ExtentColor.YELLOW));
+	}
 
-	public void onTestFailedButWithinSuccessPercentage(ITestResult Result)					
-	{		
+	@Override
+	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {}
 
-	}		
+	// ✅ Screenshot method (single file per test)
+	public String captureScreenshot(String testName) {
+		if (driver == null) return null;
 
+		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		String screenshotPath = System.getProperty("user.dir") + "\\ScreenShots\\" + testName + "_" + timeStamp + ".png";
+
+		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		File dest = new File(screenshotPath);
+		try {
+			FileUtils.copyFile(src, dest);
+			return screenshotPath;
+		} catch (IOException e) {
+			System.out.println("Screenshot capture failed: " + e.getMessage());
+			return null;
+		}
+	}
 }

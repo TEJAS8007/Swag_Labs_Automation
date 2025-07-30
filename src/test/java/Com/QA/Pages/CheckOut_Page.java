@@ -23,13 +23,13 @@ public class CheckOut_Page {
 	By country_Code = By.xpath("//input[contains(@name,'postalCode')]");
 	By Continu_Button = By.xpath("//input[contains(@name,'continue')]");
 	
-	public void Verify_Checkout_Page_Title() {
-		String Expected_title = driver.getTitle();
+	public void Verify_Checkout_Page_Title(String title) {
+		String Expected_title = Utilities.validate_Title(driver,title);
 		System.out.println(Expected_title);
 	}
 	
-	public void Verify_Checkout_Page_Url() {
-		String Expected_url = driver.getCurrentUrl();
+	public void Verify_Checkout_Page_Url(String url) {
+		String Expected_url = Utilities.validate_Url(driver, url);
 		System.out.println(Expected_url);
 	}
 	

@@ -36,7 +36,7 @@ public class Product_Test extends Base_Test{
 		log.info("Home Page Product Selected....");
 	}
 	
-	@Test(priority = 3)
+	@Test(priority = 3,dependsOnMethods = "Home_Page_Test()")
 	public void Cart_Page_Test() {
 		cart.Verify_Cart_Page_Title(Data.getProperty("title"));
 		log.info("Cart Page title verified....");
@@ -54,12 +54,12 @@ public class Product_Test extends Base_Test{
 		log.info("Cart Page Clicked Cart....");
 	}
 	
-	@Test(priority = 4, dataProvider = "getData()")
+	@Test(priority = 4, dataProvider = "getData()",dependsOnMethods = "Cart_Page_Test()")
 	public void Checkout_Page_Test(String fn,String ln,String po) {
 		
-		checkout.Verify_Checkout_Page_Title();
+		checkout.Verify_Checkout_Page_Title(Data.getProperty("title"));
 		log.info("Checkout Page Title Verified.....");
-		checkout.Verify_Checkout_Page_Url();
+		checkout.Verify_Checkout_Page_Url(Data.getProperty("checkout_url"));
 		log.info("Checkout Page Url Verified.....");
 		checkout.Verify_Product_Name();
 		log.info("Checkout Product Name Verified.....");
@@ -76,6 +76,29 @@ public class Product_Test extends Base_Test{
 		checkout.click_On_Continue();
 		log.info("Clicked On Continue Button.....");
 		
+	}
+	
+	@Test(priority = 5,dependsOnMethods = "Checkout_Page_Test()")
+	public void payment_page_Test() {
+		
+		payment.verify_Payment_page_Title(Data.getProperty("title"));
+		log.info("Payment Page Title Verified.....");
+		payment.verify_Payment_page_url(Data.getProperty("payment_url"));
+		log.info("Payment Page Url Verified.....");
+		payment.verify_Product_Name(Data.getProperty("Product_Name"));
+		log.info("Payment Product Name Verified.....");
+		payment.verify_Product_info(Data.getProperty("cart_info"));
+		log.info("Payment Product Info Verified.....");
+		payment.verify_Product_price(Data.getProperty("cart_price"));
+		log.info("Payment Product Price Verified.....");
+		payment.verify_payment_info(Data.getProperty("payment_info"));
+		log.info("Payment Page Payment Info Verified.....");
+		payment.verify_shipping_info(Data.getProperty("shipping_info"));
+		log.info("Payment Shipping Info Verified.....");
+		payment.verify_total_price(Data.getProperty("total_price"));
+		log.info("Payment Page Total Price Verified.....");
+		payment.click_on_findsh_button();
+		log.info("Payment Clicked on Finish.....");
 	}
 	
 	@DataProvider(name = "getData()")

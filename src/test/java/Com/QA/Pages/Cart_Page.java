@@ -28,7 +28,6 @@ public class Cart_Page {
 
 	public void Verify_Cart_Page_Url(String Url) {
 		String Expected_url = Utilities.validate_Url(driver, Url);
-		//String Expected_url = driver.getCurrentUrl();
 		System.out.println(Expected_url);
 	}
 
