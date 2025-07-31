@@ -27,20 +27,21 @@ public class Event_Listeners implements ITestListener {
 	public static WebDriver driver; // Must be assigned from your base class
 
 	public void configureReport() {
-		String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String reportName = "Swag_Labs_Report_" + timestamp + ".html";
-		htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//Reports//" + reportName);
-		reports = new ExtentReports();
-		reports.attachReporter(htmlReporter);
+	    String reportPath = System.getProperty("user.dir") + "//Reports//Swag_Labs_Report.html";
+	    
+	    htmlReporter = new ExtentSparkReporter(reportPath);
+	    reports = new ExtentReports();
+	    reports.attachReporter(htmlReporter);
 
-		reports.setSystemInfo("Machine", "pc1");
-		reports.setSystemInfo("OS", "Windows 11");
-		reports.setSystemInfo("User Name", "Tejas");
+	    reports.setSystemInfo("Machine", "pc1");
+	    reports.setSystemInfo("OS", "Windows 11");
+	    reports.setSystemInfo("User Name", "Tejas");
 
-		htmlReporter.config().setDocumentTitle("Extent Listener Report");
-		htmlReporter.config().setReportName("Swag Labs Automation Report");
-		htmlReporter.config().setTheme(Theme.DARK);
+	    htmlReporter.config().setDocumentTitle("Extent Listener Report");
+	    htmlReporter.config().setReportName("Swag Labs Automation Report");
+	    htmlReporter.config().setTheme(Theme.DARK);
 	}
+
 
 	@Override
 	public void onStart(ITestContext context) {
@@ -95,21 +96,20 @@ public class Event_Listeners implements ITestListener {
 	@Override
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {}
 
-	// ✅ Screenshot method (single file per test)
 	public String captureScreenshot(String testName) {
-		if (driver == null) return null;
+	    if (driver == null) return null;
 
-		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		String screenshotPath = System.getProperty("user.dir") + "\\ScreenShots\\" + testName + "_" + timeStamp + ".png";
+	    String screenshotPath = System.getProperty("user.dir") + "\\ScreenShots\\" + testName + ".png";
 
-		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		File dest = new File(screenshotPath);
-		try {
-			FileUtils.copyFile(src, dest);
-			return screenshotPath;
-		} catch (IOException e) {
-			System.out.println("Screenshot capture failed: " + e.getMessage());
-			return null;
-		}
+	    File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+	    File dest = new File(screenshotPath);
+	    try {
+	        FileUtils.copyFile(src, dest);
+	        return screenshotPath;
+	    } catch (IOException e) {
+	        System.out.println("Screenshot capture failed: " + e.getMessage());
+	        return null;
+	    }
 	}
+
 }

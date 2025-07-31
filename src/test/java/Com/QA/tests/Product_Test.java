@@ -19,7 +19,7 @@ public class Product_Test extends Base_Test{
 		log.info("Login Complete....");
 	}
 	
-	@Test(priority = 2,dependsOnMethods = "Login_Page_Test()")
+	@Test(priority = 2)
 	void Home_Page_Test() {
 	
 		home.Verify_Home_page_Title(Data.getProperty("title"));
@@ -36,7 +36,7 @@ public class Product_Test extends Base_Test{
 		log.info("Home Page Product Selected....");
 	}
 	
-	@Test(priority = 3,dependsOnMethods = "Home_Page_Test()")
+	@Test(priority = 3)
 	public void Cart_Page_Test() {
 		cart.Verify_Cart_Page_Title(Data.getProperty("title"));
 		log.info("Cart Page title verified....");
@@ -54,18 +54,18 @@ public class Product_Test extends Base_Test{
 		log.info("Cart Page Clicked Cart....");
 	}
 	
-	@Test(priority = 4, dataProvider = "getData()",dependsOnMethods = "Cart_Page_Test()")
+	@Test(priority = 4, dataProvider = "getData()")
 	public void Checkout_Page_Test(String fn,String ln,String po) {
 		
 		checkout.Verify_Checkout_Page_Title(Data.getProperty("title"));
 		log.info("Checkout Page Title Verified.....");
 		checkout.Verify_Checkout_Page_Url(Data.getProperty("checkout_url"));
 		log.info("Checkout Page Url Verified.....");
-		checkout.Verify_Product_Name();
+		checkout.Verify_Product_Name(Data.getProperty("Product_Name"));
 		log.info("Checkout Product Name Verified.....");
-		checkout.Verify_Product_Info();
+		checkout.Verify_Product_Info(Data.getProperty("cart_info"));
 		log.info("Checkout Product Info Verified.....");
-		checkout.Verify_Product_Price();
+		checkout.Verify_Product_Price(Data.getProperty("cart_price"));
 		log.info("Checkout Product Price Verified.....");
 		checkout.click_on_Checkout();
 		log.info("Clicked On Checkout.....");
@@ -78,7 +78,7 @@ public class Product_Test extends Base_Test{
 		
 	}
 	
-	@Test(priority = 5,dependsOnMethods = "Checkout_Page_Test()")
+	@Test(priority = 5)
 	public void payment_page_Test() {
 		
 		payment.verify_Payment_page_Title(Data.getProperty("title"));

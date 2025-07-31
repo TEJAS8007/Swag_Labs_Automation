@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import Com.QA.Utilities.Utilities;
 
@@ -49,6 +50,7 @@ public class Home_Page {
 
 		List<WebElement> infos = Utilities.Get_Multiple_Elements(driver, product_Info);
 
+		Assert.assertEquals(infos.size(), 6);
 		for(WebElement ele :infos) {
 
 			String Info = ele.getText();
@@ -59,7 +61,8 @@ public class Home_Page {
 	public void verify_Product_Price() {
 
 		List<WebElement> Prices = Utilities.Get_Multiple_Elements(driver, product_Price);
-
+    
+		Assert.assertEquals(Prices.size(), 6);
 		for(WebElement ele :Prices) {
 
 			String price = ele.getText();

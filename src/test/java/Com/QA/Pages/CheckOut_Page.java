@@ -2,6 +2,7 @@ package Com.QA.Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import Com.QA.Utilities.Utilities;
 
@@ -33,19 +34,38 @@ public class CheckOut_Page {
 		System.out.println(Expected_url);
 	}
 	
-	public void Verify_Product_Name() {
+	public void Verify_Product_Name(String pName) {
 		String name = driver.findElement(product_Name).getText();
 		System.out.println(name);
+		
+		if(name.equals(pName)) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
 	}
 	
-	public void Verify_Product_Info() {
+	public void Verify_Product_Info(String pInfo) {
 		String info = driver.findElement(product_info).getText();
 		System.out.println(info);
+		
+		if(info.equals(pInfo)) {
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.assertTrue(false);
+		}
 	}
 	
-	public void Verify_Product_Price() {
+	public void Verify_Product_Price(String pPrice) {
 		String price = driver.findElement(product_Price).getText();
 		System.out.println(price);
+		
+		if(price.equals(pPrice)) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
 	}
 	
 	public void click_on_Checkout() {

@@ -1,7 +1,11 @@
 package Com.QA.Pages;
 
+import static org.testng.Assert.assertTrue;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import Com.QA.Utilities.Utilities;
 
@@ -32,8 +36,25 @@ public class Login_Page {
 	
 	public void login_Valid_userName(String un , String ps) {
 		
-		driver.findElement(userName).sendKeys(un);
-		driver.findElement(passWord).sendKeys(ps);
+		WebElement unName = driver.findElement(userName);
+		unName.sendKeys(un);
+		
+		if(unName.getAttribute("value").equals(un)) {
+			 assertTrue(true);
+		}
+		else {
+			Assert.assertTrue(false);
+		}
+		
+		WebElement pass = driver.findElement(passWord);
+		pass.sendKeys(ps);
+		
+		if(pass.getAttribute("value").equals(ps)) {
+			 assertTrue(true);
+		}
+		else {
+			Assert.assertTrue(false);
+		}
 		Utilities.Click_With_Fluent(driver, login_button);
 	}
 }
